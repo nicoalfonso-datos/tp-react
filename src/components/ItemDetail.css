@@ -38,6 +38,12 @@
   line-height: 1.5;
 }
 
+.item-detail-cart-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #253047;
+}
+
 @media (max-width: 650px) {
   .item-detail {
     flex-direction: column;
