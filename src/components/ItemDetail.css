@@ -1,0 +1,51 @@
+.item-detail {
+  display: flex;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(37, 48, 71, 0.15);
+}
+
+.item-detail > img {
+  width: 50%;
+  min-height: 320px;
+  object-fit: cover;
+}
+
+.item-detail-info {
+  flex: 1;
+  padding: 28px;
+}
+
+.item-detail-info h3 {
+  margin: 0 0 12px;
+  color: #253047;
+  font-size: 1.6rem;
+}
+
+.item-detail-category {
+  margin: 0 0 8px;
+  color: #666;
+}
+
+.item-detail-price {
+  color: #253047;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.item-detail-info > p {
+  line-height: 1.5;
+}
+
+@media (max-width: 650px) {
+  .item-detail {
+    flex-direction: column;
+  }
+
+  .item-detail > img {
+    width: 100%;
+    height: 260px;
+    min-height: 0;
+  }
+}

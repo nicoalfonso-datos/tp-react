@@ -1,0 +1,15 @@
+.item-detail-container {
+  max-width: 960px;
+  margin: 0 auto 48px;
+  padding: 0 24px;
+}
+
+.item-detail-container h2 {
+  margin: 0 0 20px;
+  color: #253047;
+  text-align: center;
+}
+
+.item-detail-loading {
+  text-align: center;
+}

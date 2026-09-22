@@ -1,0 +1,29 @@
+.item-count {
+  margin-top: 24px;
+}
+
+.item-count p {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.item-count-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.item-count-buttons button {
+  width: 40px;
+  height: 36px;
+  border: 0;
+  border-radius: 4px;
+  background-color: #253047;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.item-count-buttons button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
