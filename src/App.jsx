@@ -1,10 +1,12 @@
-import './App.css'
+import ItemListContainer from './components/ItemListContainer'
+import Navbar from './components/Navbar'
 
 function App() {
   return (
-    <main className="inicio">
-      <h1>Musical Store 2.0</h1>
-    </main>
+    <>
+      <Navbar />
+      <ItemListContainer greeting="¡Bienvenidos a Musical Store 2.0!" />
+    </>
   )
 }
 

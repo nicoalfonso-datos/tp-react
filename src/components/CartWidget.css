@@ -1,0 +1,21 @@
+.cart-widget {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-widget-icon {
+  font-size: 1.4rem;
+}
+
+.cart-widget-cantidad {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #d08f52;
+  color: #fff;
+  font-size: 0.8rem;
+}

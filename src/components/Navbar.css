@@ -1,0 +1,38 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 32px;
+  background-color: #253047;
+  color: #fff;
+}
+
+.navbar-logo {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navbar-categorias {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar-categorias a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-categorias a:hover {
+  text-decoration: underline;
+}
