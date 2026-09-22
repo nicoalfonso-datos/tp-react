@@ -1,0 +1,35 @@
+.item-card {
+  width: 260px;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(37, 48, 71, 0.15);
+  text-align: left;
+}
+
+.item-card img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.item-card-info {
+  padding: 16px;
+}
+
+.item-card-info h2 {
+  margin: 0 0 8px;
+  color: #253047;
+  font-size: 1.1rem;
+}
+
+.item-card-info p {
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+
+.item-card-price {
+  color: #253047;
+  font-weight: bold;
+}
