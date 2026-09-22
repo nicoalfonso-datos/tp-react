@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { getProductById } from '../services/getProductById'
 import ItemDetail from './ItemDetail'
 import './ItemDetailContainer.css'
 
 function ItemDetailContainer() {
+  const { id } = useParams()
   const [product, setProduct] = useState(null)
   const [error, setError] = useState('')
 
   useEffect(() => {
     setProduct(null)
     setError('')
-    getProductById(1)
+    getProductById(Number(id))
       .then((productFound) => setProduct(productFound))
       .catch((error) => setError(error.message))
-  }, [])
+  }, [id])
 
   return (
     <section className="item-detail-container">

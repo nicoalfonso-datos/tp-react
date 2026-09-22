@@ -1,0 +1,10 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.app-layout > main,
+.app-layout > .item-detail-container {
+  flex: 1;
+}

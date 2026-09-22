@@ -36,3 +36,7 @@
 .navbar-categorias a:hover {
   text-decoration: underline;
 }
+
+.navbar-categorias a.active {
+  text-decoration: underline;
+}

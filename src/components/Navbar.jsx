@@ -1,4 +1,5 @@
 import CartWidget from './CartWidget'
+import { NavLink } from 'react-router-dom'
 import './Navbar.css'
 
 function Navbar() {
@@ -7,11 +8,11 @@ function Navbar() {
       <h2 className="navbar-logo">Musical Store 2.0</h2>
       <div className="navbar-menu">
         <ul className="navbar-categorias">
-          <li><a href="#">Guitarras</a></li>
-          <li><a href="#">Bajos</a></li>
-          <li><a href="#">Baterías</a></li>
-          <li><a href="#">Teclados</a></li>
-          <li><a href="#">Accesorios</a></li>
+          <li><NavLink to="/" end>Inicio</NavLink></li>
+          <li><NavLink to="/category/guitarras">Guitarras</NavLink></li>
+          <li><NavLink to="/category/bajos">Bajos</NavLink></li>
+          <li><NavLink to="/category/baterias">Baterías</NavLink></li>
+          <li><NavLink to="/category/teclados">Teclados</NavLink></li>
         </ul>
         <CartWidget />
       </div>

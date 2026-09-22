@@ -10,3 +10,8 @@
   color: #253047;
   font-size: 2rem;
 }
+
+.item-list-message {
+  padding: 20px;
+  text-align: center;
+}
