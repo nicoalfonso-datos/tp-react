@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getProducts } from '../mock/asyncMock'
+import { getProducts } from '../services/getProducts'
 import ItemList from './ItemList'
 import './ItemListContainer.css'
 
@@ -15,21 +15,35 @@ function ItemListContainer({ greeting }) {
   const { id } = useParams()
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
   useEffect(() => {
-    const loadProducts = async () => {
-      const products = await getProducts()
-      setItems(products)
-      setLoading(false)
+    async function loadProducts() {
+      setLoading(true)
+      setError('')
+
+      const categoryName = categoryNames[id]
+      if (id && !categoryName) {
+        setItems([])
+        setError('No existe esa categoría.')
+        setLoading(false)
+        return
+      }
+
+      try {
+        const products = await getProducts(categoryName)
+        setItems(products)
+      } catch (error) {
+        setError(error.message || 'No se pudieron cargar los productos.')
+      } finally {
+        setLoading(false)
+      }
     }
 
     loadProducts()
-  }, [])
+  }, [id])
 
   const categoryName = categoryNames[id]
-  const filteredItems = id
-    ? items.filter((product) => product.category === categoryName)
-    : items
   const pageTitle = id ? categoryName || 'Categoría no encontrada' : greeting
 
   return (
@@ -39,8 +53,10 @@ function ItemListContainer({ greeting }) {
       </section>
       {loading ? (
         <p className="item-list-message">Cargando productos...</p>
-      ) : filteredItems.length > 0 ? (
-        <ItemList items={filteredItems} />
+      ) : error ? (
+        <p className="item-list-message">{error}</p>
+      ) : items.length > 0 ? (
+        <ItemList items={items} />
       ) : (
         <p className="item-list-message">No hay productos en esta categoría.</p>
       )}

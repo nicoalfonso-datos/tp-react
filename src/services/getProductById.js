@@ -1,15 +1,17 @@
-import { products } from '../mock/asyncMock.js'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '../firebase/config'
 
-export function getProductById(productId) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const product = products.find((item) => item.id === productId)
+export async function getProductById(productId) {
+  if (!db) {
+    throw new Error('Firebase no está configurado. Completá las variables del archivo .env.')
+  }
 
-      if (product) {
-        resolve(product)
-      } else {
-        reject(new Error('Producto no encontrado'))
-      }
-    }, 500)
-  })
+  const productReference = doc(db, 'products', productId)
+  const productDocument = await getDoc(productReference)
+
+  if (!productDocument.exists()) {
+    throw new Error('Producto no encontrado.')
+  }
+
+  return { ...productDocument.data(), id: productDocument.id }
 }

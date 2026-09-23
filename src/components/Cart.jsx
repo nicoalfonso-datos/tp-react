@@ -32,7 +32,9 @@ function Cart() {
           <p className="cart-total">Total: ${total}</p>
           <div className="cart-actions">
             <button onClick={clear}>Vaciar carrito</button>
-            <button type="button">Finalizar compra</button>
+            <Link className="cart-checkout-button" to="/checkout">
+              Finalizar compra
+            </Link>
             <Link to="/">Seguir comprando</Link>
           </div>
         </>

@@ -1,0 +1,71 @@
+.auth-page {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 28px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(37, 48, 71, 0.15);
+}
+
+.auth-card h1 {
+  margin-top: 0;
+  color: #253047;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-form label,
+.checkout-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-form input,
+.checkout-form input,
+.checkout-form textarea {
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.auth-form button,
+.checkout-form button {
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 4px;
+  background-color: #253047;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.auth-form button:disabled,
+.checkout-form button:disabled {
+  background-color: #999;
+  cursor: wait;
+}
+
+.auth-error,
+.auth-warning,
+.checkout-error {
+  color: #a62f2f;
+}
+
+.auth-loading {
+  flex: 1;
+  padding: 40px 20px;
+  text-align: center;
+}

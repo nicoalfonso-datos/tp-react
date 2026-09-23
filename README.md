@@ -1,44 +1,14 @@
 # Musical Store 2.0
 
-Tienda online de instrumentos musicales. En esta unidad se agregan los primeros componentes del layout.
-
-En la Unidad 3 se suma un catálogo que carga productos desde una promesa local, simulando una espera de dos segundos.
-
-En la Unidad 4 se agrega el detalle de un producto. `getProductById` busca por identificador con una promesa, `ItemDetailContainer` administra la carga y `ItemDetail` muestra la información completa. Dentro del detalle se reutiliza `ItemCount`, que controla la cantidad según el stock del producto.
-
-En la Unidad 5 se incorpora `react-router-dom` para navegar entre el inicio, las categorías y el detalle de cada producto. El Navbar y el Footer se mantienen visibles con un layout compartido. También se agrega una ruta 404 y un ejemplo de ruta protegida para `/checkout`.
-
-En la Unidad 6 se agrega un contexto global para el carrito. Los productos se pueden agregar desde el detalle, ver en `/cart`, eliminar individualmente o quitar todos juntos.
-
-## Componentes
-
-- `Navbar`: muestra el nombre de la tienda, las categorías de instrumentos y el carrito.
-- `CartWidget`: enlaza con el carrito y muestra la cantidad total de unidades agregadas.
-- `ItemListContainer`: muestra el mensaje de bienvenida que recibe mediante la prop `greeting`.
-- `ItemList`: recorre los productos recibidos y renderiza una card por producto.
-- `Item`: presenta la imagen, el nombre, la categoría y el precio de un producto.
-- `ItemDetailContainer`: solicita un producto por su id y muestra el estado de carga.
-- `ItemDetail`: presenta la imagen, el nombre, la categoría, la descripción, el precio y el stock.
-- `ItemCount`: permite aumentar o disminuir la cantidad sin superar el stock ni bajar de cero.
-- `AppLayout`: mantiene el Navbar y el Footer alrededor de las distintas páginas.
-- `NotFound`: muestra un mensaje para las rutas inexistentes.
-- `PrivateRoute`: simula el acceso restringido a `/checkout` hasta que se agregue autenticación.
-- `CartProvider`: comparte el estado y las acciones del carrito en toda la aplicación.
-- `Cart`: muestra los productos agregados, sus subtotales y el total de la compra.
-
-Los datos de prueba están en `src/mock/asyncMock.js`. `getProducts` devuelve una promesa que se resuelve después de dos segundos. `ItemListContainer` obtiene los datos con `useEffect`, los guarda en el estado `items` con `useState` y los pasa a `ItemList`.
-
-La búsqueda por id está en `src/services/getProductById.js` y simula una demora de medio segundo. En la Unidad 5, `ItemDetailContainer` obtiene el identificador desde `/item/:id` y vuelve a consultar el producto cuando cambia.
-
-Las categorías están disponibles en `/category/guitarras`, `/category/bajos`, `/category/baterias` y `/category/teclados`. Los productos enlazan a `/item/:id`; la página de inicio muestra todos los productos.
-
-El `CartWidget` muestra la cantidad total de unidades agregadas. El carrito se conserva al navegar entre rutas y permanece en memoria mientras la aplicación está abierta.
+Tienda de instrumentos musicales desarrollada como proyecto por etapas para el curso de React de Coderhouse. En la Unidad 7, el catálogo y las órdenes se conectan con Firebase; el inicio de sesión y el registro usan Firebase Authentication.
 
 ## Tecnologías
 
 - React 19
 - Vite
-- JavaScript
+- React Router
+- Firebase Authentication
+- Cloud Firestore
 
 ## Instalación y ejecución
 
@@ -48,8 +18,74 @@ El `CartWidget` muestra la cantidad total de unidades agregadas. El carrito se c
    npm install
    ```
 
-2. Iniciar el servidor de desarrollo:
+2. Copiar `.env.example` como `.env` y completar los valores de configuración de la aplicación web de Firebase.
+3. Iniciar la aplicación:
 
    ```bash
    npm run dev
    ```
+
+Para generar la versión de producción se puede ejecutar `npm run build`.
+
+## Variables de entorno
+
+El archivo `.env` debe estar en la raíz del proyecto. Vite expone al navegador las variables que comienzan con `VITE_`, por eso este archivo solo debe contener la configuración pública de la aplicación web de Firebase. No se deben agregar claves privadas ni credenciales de administrador.
+
+Se necesitan estas variables:
+
+- `VITE_FIREBASE_API_KEY`
+- `VITE_FIREBASE_AUTH_DOMAIN`
+- `VITE_FIREBASE_PROJECT_ID`
+- `VITE_FIREBASE_STORAGE_BUCKET`
+- `VITE_FIREBASE_MESSAGING_SENDER_ID`
+- `VITE_FIREBASE_APP_ID`
+
+`.env` está excluido de Git. El archivo `.env.example` se incluye como plantilla sin valores.
+
+## Configuración de Firebase
+
+1. Crear un proyecto en Firebase y registrar una aplicación web.
+2. En Authentication, habilitar el proveedor **Correo electrónico/contraseña**.
+3. Crear la base de datos de Cloud Firestore.
+4. Copiar los valores de configuración de la aplicación web al archivo local `.env`.
+5. Publicar las reglas incluidas en `firestore.rules` en Firestore Rules.
+6. Crear los documentos de productos descritos abajo.
+
+La configuración central está en `src/firebase/config.js`, que exporta las instancias `auth` y `db`. El archivo no contiene datos de configuración escritos directamente en el código.
+
+## Colecciones de Firestore
+
+### `products`
+
+Cada documento representa un producto. El ID del documento se usa como identificador del producto en las rutas y en el carrito. Campos requeridos:
+
+```json
+{
+  "name": "Guitarra eléctrica",
+  "category": "Guitarras",
+  "price": 320000,
+  "image": "https://ejemplo.com/guitarra.jpg",
+  "description": "Guitarra eléctrica ideal para ensayos y shows en vivo.",
+  "stock": 6
+}
+```
+
+Las categorías deben coincidir con los nombres usados por la tienda: `Guitarras`, `Bajos`, `Baterías` y `Teclados`. La página principal consulta todos los productos; las rutas de categoría consultan Firestore por categoría. El detalle obtiene un documento por su ID.
+
+### `orders`
+
+Al completar una compra se crea un documento con el ID generado por Firestore. Incluye `userId`, `userEmail`, los datos de entrega en `buyer`, los productos comprados con sus IDs, nombres, precios y cantidades, el total y `createdAt` (fecha del servidor). El carrito se vacía únicamente después de que Firestore confirma la creación.
+
+Las reglas de `firestore.rules` permiten leer productos, impiden modificarlos desde la aplicación y permiten crear una orden solo a un usuario autenticado para su propio `userId`. Para aplicar las reglas, copiarlas en la sección Firestore Rules de Firebase Console y publicarlas.
+
+## Estructura principal
+
+- `src/firebase/config.js`: inicialización central de Firebase, Firestore y Authentication.
+- `src/context/AuthContext.jsx`: usuario, estado de sesión y acciones de autenticación.
+- `src/context/CartContext.jsx`: estado y acciones del carrito.
+- `src/services/getProducts.js`: listado general y consulta filtrada por categoría.
+- `src/services/getProductById.js`: consulta de producto por ID.
+- `src/services/createOrder.js`: creación de órdenes en Firestore.
+- `src/components`: navegación, catálogo, detalle, formularios de acceso, carrito y checkout.
+
+Si Firebase todavía no está configurado, el catálogo y los formularios muestran un mensaje en la aplicación; para probar autenticación, catálogo y checkout hace falta completar los pasos anteriores.

@@ -1,0 +1,42 @@
+.checkout-page {
+  flex: 1;
+  width: 90%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 0;
+}
+
+.checkout-page h1,
+.checkout-page h2 {
+  color: #253047;
+}
+
+.checkout-summary,
+.checkout-form,
+.checkout-confirmation {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(37, 48, 71, 0.12);
+}
+
+.checkout-summary h2,
+.checkout-form h2 {
+  margin: 0;
+}
+
+.checkout-summary p {
+  margin: 0;
+}
+
+.checkout-confirmation {
+  align-items: flex-start;
+}
+
+.checkout-confirmation a {
+  color: #253047;
+}

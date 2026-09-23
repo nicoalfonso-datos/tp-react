@@ -8,9 +8,43 @@
   color: #fff;
 }
 
-.navbar-logo {
-  margin: 0;
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-logo-mark {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.navbar-logo-mark img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 116px;
+  height: 116px;
+  max-width: none;
+  transform: translate(-28px, -7px);
+  mix-blend-mode: screen;
+}
+
+.navbar-brand-text {
   font-size: 1.4rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.navbar-brand-text strong {
+  color: #f57900;
 }
 
 .navbar-menu {
@@ -39,4 +73,33 @@
 
 .navbar-categorias a.active {
   text-decoration: underline;
+}
+
+.navbar-account {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+}
+
+.navbar-account a,
+.navbar-account a:visited {
+  color: #fff;
+}
+
+.navbar-account a:hover {
+  text-decoration: underline;
+}
+
+.navbar-account button {
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 4px;
+  background-color: #d08f52;
+  color: #fff;
+  cursor: pointer;
+}
+
+.navbar-error {
+  color: #ffd6d6;
 }

@@ -22,6 +22,14 @@
   color: #253047;
 }
 
+.cart-actions .cart-checkout-button {
+  padding: 10px 14px;
+  border-radius: 4px;
+  background-color: #253047;
+  color: #fff;
+  text-decoration: none;
+}
+
 .cart-list {
   margin: 0;
   padding: 0;
