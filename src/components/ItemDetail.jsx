@@ -4,7 +4,9 @@ import ItemCount from './ItemCount'
 import './ItemDetail.css'
 
 function ItemDetail({ product }) {
-  const { addItem, isInCart } = useCart()
+  const { addItem, cart, isInCart } = useCart()
+  const itemInCart = cart.find((item) => item.id === product.id)
+  const availableStock = Math.max(product.stock - (itemInCart?.quantity || 0), 0)
 
   return (
     <article className="item-detail">
@@ -14,11 +16,12 @@ function ItemDetail({ product }) {
         <h3>{product.name}</h3>
         <p className="item-detail-price">${product.price}</p>
         <p>{product.description}</p>
-        <p>Stock disponible: {product.stock}</p>
+        <p>Stock disponible: {availableStock}</p>
         <ItemCount
-          stock={product.stock}
+          stock={availableStock}
           onAdd={(quantity) => addItem(product, quantity)}
         />
+        {availableStock === 0 && <p>Ya alcanzaste el stock disponible en el carrito.</p>}
         {isInCart(product.id) && (
           <Link className="item-detail-cart-link" to="/cart">
             Terminar mi compra

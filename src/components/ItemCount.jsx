@@ -4,6 +4,11 @@ import './ItemCount.css'
 function ItemCount({ stock, onAdd }) {
   const [quantity, setQuantity] = useState(0)
 
+  function addToCart() {
+    onAdd(quantity)
+    setQuantity(0)
+  }
+
   function decreaseQuantity() {
     if (quantity > 0) {
       setQuantity(quantity - 1)
@@ -29,7 +34,7 @@ function ItemCount({ stock, onAdd }) {
       </div>
       <button
         className="item-count-add"
-        onClick={() => onAdd(quantity)}
+        onClick={addToCart}
         disabled={quantity === 0}
       >
         Agregar al carrito

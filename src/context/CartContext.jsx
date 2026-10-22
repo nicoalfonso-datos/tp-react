@@ -10,12 +10,17 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([])
 
   function addItem(item, quantity) {
-    if (quantity <= 0) {
+    if (quantity <= 0 || quantity > item.stock) {
       return
     }
 
     setCart((previousCart) => {
       const existingItem = previousCart.find((product) => product.id === item.id)
+      const currentQuantity = existingItem ? existingItem.quantity : 0
+
+      if (currentQuantity + quantity > item.stock) {
+        return previousCart
+      }
 
       if (existingItem) {
         return previousCart.map((product) =>
